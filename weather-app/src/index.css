@@ -90,55 +90,23 @@ h1 {
 
 }
 
-.centerImage {
-  width: 424px;
-  height: 387px;
-  margin: auto;
-  position: relative;
-}
-
-centerCover {
-
-}
 .container {
- /* text-align: center;
-  box-sizing: border-box;
-
-  position: absolute;
-  left: 12.38%;
-  right: 67.71%;
-  top: 22.38%;
-  bottom: 25.96%;
-  align-items: center;
-  justify-content: center; */
-
-  margin: auto;
- /* margin-left: 100px; */
-  text-align: center;
-  box-sizing: border-box;
-  position: absolute;
-  width:fit-content;
-  
- /* border: 3px solid #247B7B;
-  border-radius: 50px; */
-}
-.container2 {
   margin: auto;
   text-align: center;
   box-sizing: border-box;
   
   width:fit-content; 
   position: relative;
-/*  left: 41.72%;
-  right: 38.37%;
-  top: 22.38%;
-  bottom: 25.96%; */
 
-  /* Border */
-  /*
-  border: 3px solid #247B7B;
-  border-radius: 50px; 
-*/
+}
+.container2 {
+  margin: auto;
+ /* margin-left: 100px; */
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  width:fit-content;
+
 }
 
 .container3 {

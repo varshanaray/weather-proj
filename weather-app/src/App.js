@@ -81,7 +81,7 @@ function App() {
           value={location}
           onChange={(event) => setLocation(event.target.value)}
           onKeyPress={searchLocation}
-          placeholder="enter a city"
+          placeholder="Enter a city"
           type="text"
         />
       </div>
@@ -91,7 +91,7 @@ function App() {
         </button>
       </div>
       <div className="welcome">
-        welcome to myClimate!
+        Welcome to MyWeather!
       </div>
       <div className="boxes">
         <div className="container">
