@@ -7,9 +7,8 @@ If Node.js and npm are not installed, to be able to run the app, they should be 
 can be used in the terminal. Also, Axios needs to be installed if it is not already. To install, cd into the weather-app directory, and type "npm install axios" in the terminal. Finally, to open a browser to see the app, cd into the weather-app directory and type "npm start" in the terminal. A browser should open showing the app.
 
 Helpful Sources:
-[1]: https://nodejs.org/en/download/
-
-[2]: https://docs.npmjs.com/cli/v6/commands
+* https://nodejs.org/en/download/
+* https://docs.npmjs.com/cli/v6/commands
 
 ## Assumptions Made
 The instructions did not say what timezone the times should be in, so I decided to display the times in Coordinated Universal Time (UTC). Also, the instructions did not specify that the high and low temperatures of each day should be shown, so I decided to show the temperature at the specified time of the day. The instructions states that the app should show the upcoming weather. The first forecast is the upcoming weather closest to the current time, and the second is the weather on the next day at the same time, and the third forecast is the
