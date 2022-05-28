@@ -14,9 +14,4 @@ Helpful Sources:
 * https://docs.npmjs.com/cli/v6/commands
 
 ## Assumptions Made
-The instructions did not say what timezone the times should be in, so I decided to display the times in Coordinated Universal Time (UTC). Also, the instructions did not specify that the high and low temperatures of each day should be shown, so I decided to show the temperature at the specified time of the day. The instructions states that the app should show the upcoming weather. The first forecast is the upcoming weather closest to the current time, and the second is the weather on the next day at the same time, and the third forecast is the
-weather on the day after next at the same time. In addition, the instructions did not discuss the type of units for the weather forecast, so I 
-decided to display the data in Imperial units.
-
-
-
+The instructions did not say what timezone the times should be in, so I decided to display the times in Coordinated Universal Time (UTC). Also, the instructions did not specify that the high and low temperatures of each day should be shown, so I decided to show the temperature at the specified time of the day. The instructions state that the app should show the upcoming weather. The first forecast is the upcoming weather closest to the current time, and the second is the weather on the next day at the same time, and the third forecast is the weather on the day after next at the same time. In addition, the instructions did not discuss the type of units for the weather forecast, so I decided to display the data in Imperial units.
