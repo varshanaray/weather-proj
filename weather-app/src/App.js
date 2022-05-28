@@ -1,25 +1,43 @@
 import "./App.css";
 import React, { useState } from "react";
 import axios from "axios";
-//import startPage from '../pages/startPage';
-//import {ReactComponent as Rclouds} from './Cloudy.svg';
-//import clouds from './cloudsImage.png';
 
 function App() {
-  //const { height, width } = useWindowDimensions();
-  // React Hooks
   const [data, setData] = useState({});
 
   const [location, setLocation] = useState("");
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
-  const url1 = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=bbc2ae2ce282db86732850134ea4a74c`;
-  //const url2 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=bbc2ae2ce282db86732850134ea4a74c`
-  const url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=imperial&appid=bbc2ae2ce282db86732850134ea4a74c`;
+  const [lat, setLat] = React.useState("");
+  const [long, setLong] = React.useState("");
+  let url1 = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=imperial&appid=1c5733f1ce2831841ae00b13723c2f2f`;
+  let url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=imperial&appid=1c5733f1ce2831841ae00b13723c2f2f`;
+
+  const currLocation = () => {
+    axios.get(url2).then((response) => {
+      setData(response.data);
+      console.log(response.data);
+    });
+    setLat("");
+    setLong("");
+  };
+  // Checking if geolocation is supported on browser
+  if (navigator.geolocation) {
+    // Requests the current position if user accepts to provide geolocation information
+    navigator.geolocation.getCurrentPosition(updatePos);
+  } else {
+    // Not supported
+    alert("geolocation is not available");
+  }
+
+  // Gets the longitude and latitude
+  function updatePos(position) {
+    setLat(position.coords.latitude);
+    setLong(position.coords.longitude);
+  }
 
   const searchLocation = (event) => {
+    // When user presses the Enter key, the data is fetched
     if (event.key == "Enter") {
-      axios.get(url2).then((response1) => {
+      axios.get(url1).then((response1) => {
         setData(response1.data);
         console.log(response1.data);
       });
@@ -27,54 +45,7 @@ function App() {
     }
   };
 
-  /*
-  const currLocation = (event) => {
-    //if (event.key)
-    axios.get(url2).then((response2) => {
-      setData(response2.data)
-      console.log('Current Location!')
-      console.log(response2.data)
-    })
-    setLat('');
-    setLon('');
-  } */
-
-  // Current location
-    var getPosition = function (options) {
-    if (navigator.geolocation) {
-       return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject, options);
-    });
-    } else {
-      return new Promise(
-        resolve => resolve({})
-      )
-    }
-   
-  }
-  
-  getPosition()
-    .then((position) => {
-      console.log('POSITION!!!');
-      console.log(position);
-    })
-    .catch((err) => {
-      console.error(err.message);
-    }); 
-
-  /*   componentDidMount() {
-      this.getPosition()
-      .then((position) => {
-         position.coords.latitude={lat}
-         position.coords.longitude={lon}
-       })
-       .catch((err) => console.log(err.message));
-      } */
-
   return (
-    //  32.776665 lat
-    //  -96.796989 long
-    // index 0, index 8
     <div className="App">
       <div className="search">
         <input
@@ -86,16 +57,14 @@ function App() {
         />
       </div>
       <div className="currentLoc">
-        <button>
-          Current Location!
+        <button className="currButton" onClick={currLocation}>
+          Current Location
         </button>
       </div>
-      <div className="welcome">
-        Welcome to MyWeather!
-      </div>
+      <div className="welcome">Welcome to MyWeather!</div>
       <div className="boxes">
-        <div className="container">
-          <div className="left">
+        <div className="container1">
+          <div className="bottomPart">
             <div className="date">
               {data.list ? <p>{data.list[0].dt_txt}</p> : null}
             </div>
@@ -114,27 +83,27 @@ function App() {
               ) : null}
             </div>
           </div>
-          <div className="right">
+          <div className="topPart">
             <div className="feels">
               {data.list && data.list[0].main ? (
-                <p>{data.list[0].main.feels_like.toFixed()}°F</p>
+                <p>Feels like {data.list[0].main.feels_like.toFixed()}°F</p>
               ) : null}
             </div>
             <div className="humidity">
               {data.list && data.list[0].main ? (
-                <p>{data.list[0].main.humidity}%</p>
+                <p>Humidity: {data.list[0].main.humidity}%</p>
               ) : null}
             </div>
             <div className="wind">
               {data.list && data.list[0].wind ? (
-                <p>{data.list[0].wind.speed} mph</p>
+                <p>Wind: {data.list[0].wind.speed} mph</p>
               ) : null}
             </div>
           </div>
         </div>
 
         <div className="container2">
-          <div className="left">
+          <div className="bottomPart">
             <div className="date">
               {data.list ? <p>{data.list[8].dt_txt}</p> : null}
             </div>
@@ -153,34 +122,33 @@ function App() {
               ) : null}
             </div>
           </div>
-          <div className="right">
+          <div className="topPart">
             <div className="feels">
               {data.list && data.list[8].main ? (
-                <p>{data.list[8].main.feels_like.toFixed()}°F</p>
+                <p>Feels like {data.list[8].main.feels_like.toFixed()}°F</p>
               ) : null}
             </div>
             <div className="humidity">
               {data.list && data.list[8].main ? (
-                <p>{data.list[8].main.humidity}%</p>
+                <p>Humidity: {data.list[8].main.humidity}%</p>
               ) : null}
             </div>
             <div className="wind">
               {data.list && data.list[8].wind ? (
-                <p>{data.list[8].wind.speed} mph</p>
+                <p>Wind: {data.list[8].wind.speed} mph</p>
               ) : null}
             </div>
           </div>
         </div>
 
         <div className="container3">
-          <div className="left">
+          <div className="bottomPart">
             <div className="date">
               {data.list ? <p>{data.list[16].dt_txt}</p> : null}
             </div>
             <div className="location">
               {data.city ? <p>{data.city.name}</p> : null}
             </div>
-
             <div className="temp">
               {data.list && data.list[16].main ? (
                 <h1>{data.list[16].main.temp.toFixed()}°F</h1>
@@ -192,29 +160,26 @@ function App() {
               ) : null}
             </div>
           </div>
-          <div className="right">
+          <div className="topPart">
             <div className="feels">
               {data.list && data.list[16].main ? (
-                <p>{data.list[16].main.feels_like.toFixed()}°F</p>
+                <p>Feels like {data.list[16].main.feels_like.toFixed()}°F</p>
               ) : null}
             </div>
             <div className="humidity">
               {data.list && data.list[16].main ? (
-                <p>{data.list[16].main.humidity}%</p>
+                <p>Humidity: {data.list[16].main.humidity}%</p>
               ) : null}
             </div>
             <div className="wind">
               {data.list && data.list[16].wind ? (
-                <p>{data.list[16].wind.speed} mph</p>
+                <p>Wind: {data.list[16].wind.speed} mph</p>
               ) : null}
             </div>
           </div>
         </div>
-
-        </div>
-
+      </div>
     </div>
-    //width: {width} ~ height: {height}
   );
 }
 
